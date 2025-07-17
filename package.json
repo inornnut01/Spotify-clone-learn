@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon backend/server.js"
+    "dev": "nodemon backend/server.js",
+    "seed:songs": "node backend/seeds/songs.js",
+    "seed:albums": "node backend/seeds/albums.js"
   },
   "keywords": [],
   "type": "module",
