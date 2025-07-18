@@ -1,13 +1,13 @@
 import { useAuth } from "@clerk/clerk-react";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { Loader } from "lucide-react";
+import { axiosInstance } from "@/lib/axios";
 
 const updateApiToken = (token: string | null) => {
   if (token) {
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   } else {
-    delete axios.defaults.headers.common["Authorization"];
+    delete axiosInstance.defaults.headers.common["Authorization"];
   }
 };
 
