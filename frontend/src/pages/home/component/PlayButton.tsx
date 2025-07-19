@@ -1,0 +1,41 @@
+import { Button } from "@/components/ui/button";
+import { Pause, Play } from "lucide-react";
+import { usePlayerStore } from "@/stores/usePlayerStore";
+import type { Song } from "@/types";
+
+const PlayButton = ({ song }: { song: Song }) => {
+  const { currentSong, isPlaying, setCurrentSong, togglePlay } =
+    usePlayerStore();
+
+  // Add null checks to prevent the error
+  const isCurrentSong = currentSong && song && currentSong._id === song._id;
+
+  const handlePlay = () => {
+    if (!song) return; // Early return if song is not provided
+
+    if (isCurrentSong) togglePlay();
+    else setCurrentSong(song);
+  };
+
+  // Don't render if song is not provided
+  if (!song) return null;
+
+  return (
+    <Button
+      size={"icon"}
+      onClick={handlePlay}
+      className={`absolute bottom-3 right-2 bg-green-500 hover:bg-green-400 hover:scale-105 transition-all 
+				opacity-0 translate-y-2 group-hover:translate-y-0 ${
+          isCurrentSong ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+        }`}
+    >
+      {isCurrentSong && isPlaying ? (
+        <Pause className="size-5 text-black" />
+      ) : (
+        <Play className="size-5 text-black" />
+      )}
+    </Button>
+  );
+};
+
+export default PlayButton;
